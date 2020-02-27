@@ -3,13 +3,7 @@ package Playground;
 import java.util.Scanner;
 
 public class Convent {
-
-    //    metrów na centymetry
-//    metrów na milimetry
-//    centymetrów na metry
-//    milimetrów na metry
-
-    Scanner scanner = new Scanner(System.in);
+    DataReader dataReader = new DataReader();
 
     final int exit = 0;
     final int conventerMeterOnKilometer = 1;
@@ -21,7 +15,7 @@ public class Convent {
         int option;
         do {
             printOptions();
-            option = scanner.nextInt();
+            option = dataReader.getInt();
             switch (option) {
                 case conventerMeterOnKilometer:
                     conventerMeterOnKilometer();
@@ -46,28 +40,28 @@ public class Convent {
 
     void conventerMeterOnKilometer() {
         System.out.println("Ile metrow chcesz przeliczyc?");
-        double howMany = scanner.nextDouble();
+        double howMany = dataReader.howMany();
         double sumKilometer = howMany * 1000;
         System.out.println(sumKilometer + "\n \n");
     }
 
     void conventerKilometerOnMeter() {
         System.out.println("Ile kilometrow chcesz przeliczyc?");
-        double howMany = scanner.nextDouble();
+        double howMany = dataReader.howMany();
         double sumMeter = howMany / 1000;
         System.out.println(sumMeter + "\n \n");
     }
 
     void kilometerOnMile() {
         System.out.println("Ile kilometrow chcesz przeliczyc?");
-        double howMany = scanner.nextDouble();
+        double howMany = dataReader.howMany();
         double sumMeter = howMany * 1.6;
         System.out.printf("%f kilometrow to %f mil. \n \n", howMany, sumMeter);
     }
 
     void mileOnKilometer() {
         System.out.println("Ile mil chcesz przeliczyc?");
-        double howMany = scanner.nextDouble();
+        double howMany = dataReader.howMany();
         double sumMeter = howMany * 0.625;
         System.out.printf("%f mil to %f kilometrow. \n \n", howMany, sumMeter);
     }
@@ -82,10 +76,9 @@ public class Convent {
         System.out.println(mileOnKilometer + " - Mile na kilometry");
     }
 
-    void exit() {
-        System.out.println("Koniec programu.");
-        // zamykamy strumień wejścia
-        scanner.close();
+    private void exit() {
+        System.out.println("Koniec programu");
+        dataReader.close();
     }
 
 }

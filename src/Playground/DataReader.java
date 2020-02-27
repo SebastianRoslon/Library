@@ -12,7 +12,13 @@ public class DataReader {
         return number;
     }
 
-    public void close(){
+    public double howMany() {
+        double howMany = scanner.nextDouble();
+        scanner.nextLine();
+        return howMany;
+    }
+
+    public void close() {
         scanner.close();
     }
 }
