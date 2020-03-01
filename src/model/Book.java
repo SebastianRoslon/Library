@@ -21,7 +21,7 @@ public class Book {
         this.pages=pages;
         this.publisher=publisher;
     }
-
+//gettery i settery
     public String getTitle() {
         return title;
     }

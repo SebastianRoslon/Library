@@ -1,10 +1,10 @@
 package Playground;
-
 import java.util.Scanner;
 
 public class DataReader {
 
     Scanner scanner = new Scanner(System.in);
+
 
     public int getInt() {
         int number = scanner.nextInt();
@@ -21,4 +21,5 @@ public class DataReader {
     public void close() {
         scanner.close();
     }
+
 }

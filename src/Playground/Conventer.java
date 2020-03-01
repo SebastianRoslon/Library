@@ -1,17 +1,16 @@
 package Playground;
 
-import java.util.Scanner;
-
-public class Convent {
+public class Conventer {
     DataReader dataReader = new DataReader();
 
-    final int exit = 0;
-    final int conventerMeterOnKilometer = 1;
-    final int conventerKilometerOnMeter = 2;
-    final int kilometerOnMile = 3;
-    final int mileOnKilometer = 4;
+    private static final int exit = 0;
+    private static final int conventerMeterOnKilometer = 1;
+    private static final int conventerKilometerOnMeter = 2;
+    private static final int kilometerOnMile = 3;
+    private static final int mileOnKilometer = 4;
+    private static final int mixRatio = 5;
 
-    void ControlLoop() {
+    public void ControlLoop() {
         int option;
         do {
             printOptions();
@@ -29,6 +28,9 @@ public class Convent {
                 case mileOnKilometer:
                     mileOnKilometer();
                     break;
+                case mixRatio:
+                    mixRatio();
+                    break;
                 case exit:
                     exit();
                     break;
@@ -38,42 +40,49 @@ public class Convent {
         } while (option != exit);
     }
 
-    void conventerMeterOnKilometer() {
+    private void conventerMeterOnKilometer() {
         System.out.println("Ile metrow chcesz przeliczyc?");
         double howMany = dataReader.howMany();
         double sumKilometer = howMany * 1000;
         System.out.println(sumKilometer + "\n \n");
     }
 
-    void conventerKilometerOnMeter() {
+    private void conventerKilometerOnMeter() {
         System.out.println("Ile kilometrow chcesz przeliczyc?");
         double howMany = dataReader.howMany();
         double sumMeter = howMany / 1000;
         System.out.println(sumMeter + "\n \n");
     }
 
-    void kilometerOnMile() {
+    private void kilometerOnMile() {
         System.out.println("Ile kilometrow chcesz przeliczyc?");
         double howMany = dataReader.howMany();
         double sumMeter = howMany * 1.6;
         System.out.printf("%f kilometrow to %f mil. \n \n", howMany, sumMeter);
     }
 
-    void mileOnKilometer() {
+    private void mileOnKilometer() {
         System.out.println("Ile mil chcesz przeliczyc?");
         double howMany = dataReader.howMany();
         double sumMeter = howMany * 0.625;
         System.out.printf("%f mil to %f kilometrow. \n \n", howMany, sumMeter);
     }
 
+    private void mixRatio() {
+        System.out.println("Ile litrow?");
+        double howMany = dataReader.howMany();
+        double sumMeter = howMany / 50;
+        System.out.printf("Dolac %f oleju \n \n", sumMeter);
+    }
 
-    void printOptions() {
+    private void printOptions() {
         System.out.println("Co chcesz zamienic?");
         System.out.println(exit + " - wyjscie z programu");
         System.out.println(conventerMeterOnKilometer + " - Metry na kilomerty");
         System.out.println(conventerKilometerOnMeter + " - Kilometry na metry");
         System.out.println(kilometerOnMile + " - Kilometry na mile");
         System.out.println(mileOnKilometer + " - Mile na kilometry");
+        System.out.println(mixRatio + " - Mix Ratio");
     }
 
     private void exit() {
