@@ -70,6 +70,7 @@ public class Book {
         this.isbn = isbn;
     }
 
+    //metody
     public void printInfo(){
         String info = title +"; "+ author +"; "+ releaseDate +"; "+ pages +"; "+ publisher;
         if (isbn != null) {
