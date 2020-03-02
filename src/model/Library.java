@@ -2,7 +2,7 @@ package model;
 
 public class Library {
 
-    private final int maxBooks = 100;
+    private static final int maxBooks = 100;
     private Book[] books = new Book[maxBooks];
     private int booksNumber = 0;
 

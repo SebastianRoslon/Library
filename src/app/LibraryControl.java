@@ -6,9 +6,9 @@ import model.Library;
 
 public class LibraryControl {
 
-    private final int exit = 0;
-    private final int addBook = 1;
-    private final int printBooks = 2;
+    private static final int exit = 0;
+    private static final int addBook = 1;
+    private static final int printBooks = 2;
 
     private DataReader dataReader = new DataReader();
     private Library library = new Library();
