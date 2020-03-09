@@ -2,46 +2,51 @@ package model;
 
 public class Library {
 
-    private static final int MAX_BOOKS = 1000;
-    private static final int MAX_MAGAZINES = 1000;
-    private Book[] books = new Book[MAX_BOOKS];
-    private Magazine[] magazines = new Magazine[MAX_MAGAZINES];
-    private int booksNumber;
-    private int magazinesNumber;
+    private static final int MAX_PUBLICATIONS = 200;
+    private int publicatonNumber;
+    private Publication[] publications = new Publication[MAX_PUBLICATIONS];
 
     public void addBook(Book book) {
-        if (booksNumber < MAX_BOOKS) {
-            books[booksNumber] = book;
-            booksNumber++;
+        if (publicatonNumber < MAX_PUBLICATIONS) {
+            publications[publicatonNumber] = book;
+            publicatonNumber++;
         } else {
             System.out.println("Maksymalna liczba ksiazek zastala osiagnieta.");
         }
     }
 
     public void printBooks() {
-        if (booksNumber == 0) {
+        int countBooks = 0;
+        for (int i = 0; i < publicatonNumber; i++) {
+            if (publications[i] instanceof Book) {
+                publications[i].printInfo();
+                countBooks++;
+            }
+        }
+        if (countBooks == 0) {
             System.out.println("Brak ksiazek w bibliotece.");
         }
-        for (int i = 0; i < booksNumber; i++) {
-            books[i].printInfo();
+    }
+        public void addMagazine (Magazine magazine){
+            if (publicatonNumber < MAX_PUBLICATIONS) {
+                publications[publicatonNumber] = magazine;
+                publicatonNumber++;
+            } else {
+                System.out.println("Maksymalna liczba magazynow zostala osiagnieta");
+            }
+        }
+
+        public void printMagazines () {
+            int countMagazines = 0;
+            for (int i = 0; i < publicatonNumber; i++) {
+                if (publications[i] instanceof Magazine){
+                    publications[i].printInfo();
+                    countMagazines++;
+                }
+            }
+            if (countMagazines == 0){
+                System.out.println("Brak magazynow w bibliotece.");
+            }
         }
     }
 
-    public void addMagazine(Magazine magazine){
-        if(magazinesNumber < MAX_MAGAZINES){
-            magazines[magazinesNumber] = magazine;
-            magazinesNumber++;
-        }else {
-            System.out.println("Maksymalna liczba magazynow zostala osiagnieta");
-        }
-    }
-
-    public void printMagazines(){
-        if (magazinesNumber == 0){
-            System.out.println("Brak magazynow w bibliotece");
-        }
-        for (int i = 0; i < magazinesNumber; i++) {
-            magazines[i].printInfo();
-        }
-    }
-}
