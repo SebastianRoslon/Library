@@ -39,11 +39,12 @@ public class Book extends Publication {
         this.isbn = isbn;
     }
 
-
+//metoda drukujaca informacje o publikacji
     public void printInfo() {
         String info = getTitle() + "; " + author + "; " + getYear() + "; " + pages + "; " + getPublisher() + "; " + isbn + ";";
         System.out.println(info);
     }
+
 }
 
 
