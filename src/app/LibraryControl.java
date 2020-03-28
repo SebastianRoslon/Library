@@ -7,10 +7,10 @@ import model.Magazine;
 
 public class LibraryControl {
     private DataReader dataReader = new DataReader();
-    
+
     private Library library = new Library();
 
-     void controlLoop() {
+    void controlLoop() {
         Option option;
 
         do {
@@ -33,7 +33,7 @@ public class LibraryControl {
                     exit();
                     break;
             }
-        }while (option != EXIT);
+        } while (option != Option.EXIT);
     }
 
     private void printOptions() {
@@ -57,7 +57,7 @@ public class LibraryControl {
         library.addMagazine(magazine);
     }
 
-    private void printMagazines(){
+    private void printMagazines() {
         library.printMagazines();
     }
 
