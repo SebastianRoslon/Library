@@ -2,7 +2,7 @@ package model;
 
 public class Library {
 
-    private static final int MAX_PUBLICATIONS = 200;
+    private static final int MAX_PUBLICATIONS = 2000;
     private int publicatonNumber;
     private Publication[] publications = new Publication[MAX_PUBLICATIONS];
 
@@ -24,7 +24,7 @@ public class Library {
 
     private void addPublication(Publication publication) {
         if (publicatonNumber >= MAX_PUBLICATIONS) {
-            throw new ArrayIndexOutOfBoundsException("Max publication exceeded - maksymalna liczba publikacji osiagnieta" + MAX_PUBLICATIONS);
+            throw new ArrayIndexOutOfBoundsException("Max publication exceeded" + MAX_PUBLICATIONS);
         }
         publications[publicatonNumber] = publication;
         publicatonNumber++;

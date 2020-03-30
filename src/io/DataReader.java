@@ -7,50 +7,56 @@ import java.util.Scanner;
 
 public class DataReader {
     private Scanner sc = new Scanner(System.in);
+    private ConsolePrinter printer;
+
+    public DataReader(ConsolePrinter printer) {
+        this.printer = printer;
+    }
 
     public void close() {
         sc.close();
     }
 
     public int getInt() {
-        int number = sc.nextInt();
-        sc.nextLine();
-        return number;
+        try{
+            return sc.nextInt();
+        }finally {
+            sc.nextLine();
+        }
     }
 
     public Book readAndCreateBook() {
-        System.out.println("Tytul: ");
+        printer.printLine("Tytul: ");
         String title = sc.nextLine();
-        System.out.println("Autor: ");
+        printer.printLine("Autor: ");
         String author = sc.nextLine();
-        System.out.println("Wydawnictwo: ");
+        printer.printLine("Wydawnictwo: ");
         String publisher = sc.nextLine();
-        System.out.println("Isbn: ");
+        printer.printLine("Isbn: ");
         String isbn = sc.nextLine();
-        System.out.println("Rok wydania: ");
-        int relaseDate = sc.nextInt();
+        printer.printLine("Rok wydania: ");
+        int relaseDate = getInt();
         sc.nextLine();
-        System.out.println("Ilosc stron: ");
-        int pages = sc.nextInt();
-        sc.nextLine();
+        printer.printLine("Ilosc stron: ");
+        int pages = getInt();
 
         return new Book(title, author, relaseDate, pages, publisher, isbn);
     }
 
     public Magazine readAndCreateMagazine(){
-        System.out.println("Tytul:");
+        printer.printLine("Tytul:");
         String title = sc.nextLine();
-        System.out.println("Wydawnictwo:");
+        printer.printLine("Wydawnictwo:");
         String publisher = sc.nextLine();
-        System.out.println("Jezyk:");
+        printer.printLine("Jezyk:");
         String language = sc.nextLine();
-        System.out.println("Rok wydania");
+        printer.printLine("Rok wydania");
         int year = sc.nextInt();
-        System.out.println("Miesiac:");
-        int mounth = sc.nextInt();
-        System.out.println("Dzien");
-        int day = sc.nextInt();
+        printer.printLine("Miesiac:");
+        int month = getInt();
+        printer.printLine("Dzien");
+        int day = getInt();
 
-        return new Magazine(title, publisher, year, language, day, mounth);
+        return new Magazine(title, publisher, year, language, day, month);
     }
 }
