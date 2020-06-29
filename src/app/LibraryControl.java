@@ -5,25 +5,19 @@ import model.Book;
 import model.Library;
 import model.Magazine;
 
-public class LibraryControl {
-
-    //stale do kontrolowania programu
-    private static final int EXIT = 0;
-    private static final int ADD_BOOK = 1;
-    private static final int ADD_MAGAZINE = 2;
-    private static final int PRINT_BOOKS = 3;
-    private static final int PRINT_MAGAZINES = 4;
-
+class LibraryControl {
     private DataReader dataReader = new DataReader();
+
     private Library library = new Library();
 
-    public void controlLoop() {
-        int option;
+    void controlLoop() {
+        Option option;
+
         do {
             printOptions();
-            option = dataReader.getInt();
+            option = Option.createFromInt(dataReader.getInt());
             switch (option) {
-                case ADD_BOOK:
+                case ADD_BOOKS:
                     addBook();
                     break;
                 case ADD_MAGAZINE:
@@ -39,22 +33,16 @@ public class LibraryControl {
                     exit();
                     break;
                 default:
-                    System.out.println("Nie ma takiej opcji, wprowadz inna liczbe.");
+                    System.out.println("Nie ma takiej opcji, wprowadź ponownie: ");
             }
-        }while (option != EXIT);
+        } while (option != Option.EXIT);
     }
 
     private void printOptions() {
-        System.out.println("Wybierz opcje: ");
-        System.out.println(EXIT + " - Wyjscie z programu");
-        System.out.println(ADD_BOOK + " - Dodanie nowej ksiazki");
-        System.out.println(ADD_MAGAZINE + " - Dodanie nowego magazynu");
-        System.out.println(PRINT_BOOKS + " - Wyswietl dostepne ksiazki");
-        System.out.println(PRINT_MAGAZINES + " - Wyswietl dostepne magazyny");
-    }
-
-    private void printBooks() {
-        library.printBooks();
+        System.out.println("Wybierz opcję: ");
+        for (Option option : Option.values()) {
+            System.out.println(option);
+        }
     }
 
     private void addBook() {
@@ -62,17 +50,22 @@ public class LibraryControl {
         library.addBook(book);
     }
 
+    private void printBooks() {
+        library.printBooks();
+    }
+
     private void addMagazine() {
         Magazine magazine = dataReader.readAndCreateMagazine();
         library.addMagazine(magazine);
     }
 
-    private void printMagazines(){
+    private void printMagazines() {
         library.printMagazines();
     }
 
     private void exit() {
-        System.out.println("Koniec programu");
+        System.out.println("Koniec programu, papa!");
+        // zamykamy strumień wejścia
         dataReader.close();
     }
 }
