@@ -1,19 +1,13 @@
 package app;
 
-import exception.NoSuchOptionException;
-import io.ConsolePrinter;
 import io.DataReader;
 import model.Book;
 import model.Library;
 import model.Magazine;
-import model.Publication;
 
-import java.util.InputMismatchException;
+class LibraryControl {
+    private DataReader dataReader = new DataReader();
 
-public class LibraryControl {
-
-    private ConsolePrinter printer = new ConsolePrinter();
-    private DataReader dataReader = new DataReader(printer);
     private Library library = new Library();
 
     void controlLoop() {
@@ -21,9 +15,9 @@ public class LibraryControl {
 
         do {
             printOptions();
-            option = getOption();
+            option = Option.createFromInt(dataReader.getInt());
             switch (option) {
-                case ADD_BOOK:
+                case ADD_BOOKS:
                     addBook();
                     break;
                 case ADD_MAGAZINE:
@@ -39,106 +33,39 @@ public class LibraryControl {
                     exit();
                     break;
                 default:
-                    printer.printLine("Nie ma takiej opcji, wprowadz ponownie: ");
+                    System.out.println("Nie ma takiej opcji, wprowadź ponownie: ");
             }
         } while (option != Option.EXIT);
     }
 
-    private Option getOption() {
-        boolean optionOK = false;
-        Option option = null;
-        while (!optionOK) {
-            try {
-                option = Option.createFromInt(dataReader.getInt());
-                optionOK = true;
-            } catch (NoSuchOptionException e) {
-                printer.printLine(e.getMessage() + ", podaj ponownie:");
-            } catch (InputMismatchException ignored) {
-                printer.printLine("Wprowadzono wartosc ktora nie jest liczba, podaj ponownie:");
-            }
-        }
-        return option;
-    }
-
     private void printOptions() {
-        printer.printLine("Wybierz opcje:");
+        System.out.println("Wybierz opcję: ");
         for (Option option : Option.values()) {
-            printer.printLine(option.toString());
+            System.out.println(option);
         }
     }
 
     private void addBook() {
-        try {
-            Book book = dataReader.readAndCreateBook();
-            library.addBook(book);
-        } catch (InputMismatchException e) {
-            printer.printLine("Nie udalo sie utworzyc ksiazki, niepoprawne dane");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            printer.printLine("Osiagnieto limit pojemnosci, nie mozna dodac kolejnej ksiazki");
-        }
+        Book book = dataReader.readAndCreateBook();
+        library.addBook(book);
     }
 
     private void printBooks() {
-        Publication[] publications = library.getPublications();
-        printer.printBooks(publications);
+        library.printBooks();
     }
 
     private void addMagazine() {
-        try {
-            Magazine magazine = dataReader.readAndCreateMagazine();
-            library.addMagazine(magazine);
-        } catch (InputMismatchException e) {
-            printer.printLine("Nie udalo sie utworzyc magazynu, niepoprawne dane");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            printer.printLine("Osiagnieto limit pojemnosci, nie mozna dodac kolejnego magazynu");
-        }
+        Magazine magazine = dataReader.readAndCreateMagazine();
+        library.addMagazine(magazine);
     }
 
     private void printMagazines() {
-        Publication[] publications = library.getPublications();
-        printer.printMagazines(publications);
+        library.printMagazines();
     }
 
     private void exit() {
-        printer.printLine("Koniec programu");
+        System.out.println("Koniec programu, papa!");
+        // zamykamy strumień wejścia
         dataReader.close();
-    }
-
-
-    private enum Option {
-        EXIT(0, "Wyjscie z programu"),
-        ADD_BOOK(1, "Dodanie ksiazki"),
-        ADD_MAGAZINE(2, "Dodanie magazynu/gazety"),
-        PRINT_BOOKS(3, "Wyswietlenie dostepnych ksiazek"),
-        PRINT_MAGAZINES(4, "Wyswietlenie dostepnych magazynow/gazet");
-
-        private int value;
-        private String description;
-
-        public int getValue() {
-            return value;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        Option(int value, String desc) {
-            this.value = value;
-            this.description = desc;
-        }
-
-        @Override
-        public String toString() {
-            return value + " - " + description;
-        }
-
-        static Option createFromInt(int option) throws NoSuchOptionException {
-            try {
-                return Option.values()[option];
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new NoSuchOptionException("Brak opcji o id " + option);
-            }
-        }
     }
 }

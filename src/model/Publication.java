@@ -2,41 +2,59 @@ package model;
 
 import java.util.Objects;
 
-    public class Publication {
-        private String title;
-        private String publisher;
-        private int year;
 
-        Publication(String title, String publisher, int year) {
-            this.title = title;
-            this.publisher = publisher;
-            this.year = year;
-        }
+class Publication {
+    private String title;
+    private String publisher;
+    private int year;
 
-        int getYear() {
-            return year;
-        }
+    Publication(String title, String publisher, int year) {
+        this.title = title;
+        this.publisher = publisher;
+        this.year = year;
+    }
 
-        void setYear(int year) {
-            this.year = year;
-        }
+    int getYear() {
+        return year;
+    }
 
-        String getTitle() {
-            return title;
-        }
+    void setYear(int year) {
+        this.year = year;
+    }
 
-        void setTitle(String title) {
-            this.title = title;
-        }
+    String getTitle() {
+        return title;
+    }
 
-        String getPublisher() {
-            return publisher;
-        }
+    void setTitle(String title) {
+        this.title = title;
+    }
 
-        void setPublisher(String publisher) {
-            this.publisher = publisher;
-        }
+    String getPublisher() {
+        return publisher;
+    }
 
-        public void printInfo() {
-        }
+    void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    @Override
+    public String toString() {
+        return title + ", " + publisher + ", " + year;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Publication that = (Publication) o;
+        return year == that.year &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(publisher, that.publisher);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, publisher, year);
+    }
 }

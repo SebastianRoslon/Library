@@ -3,26 +3,27 @@ package model;
 import java.util.Objects;
 
 public class Book extends Publication {
-    //pola
+    // Pola
     private String author;
     private int pages;
     private String isbn;
 
-    //konstruktor
-    public Book(String title, String author, int year, int pages, String publisher, String isbn) {
+    // Konstruktory
+    public Book(String title, String author, int year, int pages, String publisher,
+                String isbn) {
         super(title, publisher, year);
         this.pages = pages;
         this.author = author;
         this.isbn = isbn;
     }
 
-    //gettery i settery
-    public String getAuthor() {
-        return author;
+    // settery i gettery
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public int getPages() {
@@ -33,12 +34,12 @@ public class Book extends Publication {
         this.pages = pages;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override
