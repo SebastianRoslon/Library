@@ -48,6 +48,8 @@ public class CsvFileManager implements FileManager {
         String[] split = csvText.split(";");
         String type = split[0];
         if (Book.TYPE.equals(type)) {
+            return createBook(split);
+        }else if(Magazine.TYPE.equals(type)){
             return createMagazine(split);
         }
         throw new InvalidDataException("Nieznany typ publikacji: " + type);
