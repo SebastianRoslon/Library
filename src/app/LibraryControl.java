@@ -22,12 +22,12 @@ class LibraryControl {
 
     private Library library;
 
-    LibraryControl(){
+    LibraryControl() {
         fileManager = new FileManagerBuilder(printer, dataReader).build();
-        try{
+        try {
             library = fileManager.importData();
             printer.printLine("Zaimportowane dane z pliku ");
-        }catch (DataImportException | InvalidDataException e){
+        } catch (DataImportException | InvalidDataException e) {
             printer.printLine(e.getMessage());
             printer.printLine("Zainicjowano nowa baze.");
             library = new Library();
@@ -52,6 +52,12 @@ class LibraryControl {
                     break;
                 case PRINT_MAGAZINES:
                     printMagazines();
+                    break;
+                case  DELETE_BOOK:
+                    deleteBook();
+                    break;
+                case DELETE_MAGAZINE:
+                    deleteMagazine();
                     break;
                 case EXIT:
                     exit();
@@ -118,11 +124,35 @@ class LibraryControl {
         printer.printMagazines(publications);
     }
 
+    private void deleteMagazine() {
+        try {
+            Magazine magazine = dataReader.readAndCreateMagazine();
+            if (library.removePublication(magazine))
+                printer.printLine("Usunieto magazyn.");
+            else
+                printer.printLine("Brak wskazanego magazynu.");
+        } catch (InputMismatchException e){
+            printer.printLine("Nie udalo sie utworzyc magazynu, niepoprawne dane.");
+        }
+    }
+
+    private void deleteBook() {
+        try {
+            Book book = dataReader.readAndCreateBook();
+            if (library.removePublication(book))
+                printer.printLine("Usunieto ksiazke.");
+            else
+                printer.printLine("Brak wskazanej ksiazki.");
+        } catch (InputMismatchException e){
+            printer.printLine("Nie udalo sie utworzyc ksiazki, niepoprawne dane.");
+        }
+    }
+
     private void exit() {
-        try{
+        try {
             fileManager.exportData(library);
             printer.printLine("Eksport danych do pliku zakonczony powodzeniem.");
-        }catch (DataExportException e){
+        } catch (DataExportException e) {
             printer.printLine(e.getMessage());
         }
         dataReader.close();
@@ -134,7 +164,9 @@ class LibraryControl {
         ADD_BOOK(1, "Dodanie książki"),
         ADD_MAGAZINE(2, "Dodanie magazynu/gazety"),
         PRINT_BOOKS(3, "Wyświetlenie dostępnych książek"),
-        PRINT_MAGAZINES(4, "Wyświetlenie dostępnych magazynów/gazet");
+        PRINT_MAGAZINES(4, "Wyświetlenie dostępnych magazynów/gazet"),
+        DELETE_BOOK(5, "Usun ksiazke"),
+        DELETE_MAGAZINE(6, "Usunieto magazyn");
 
         private int value;
         private String description;
