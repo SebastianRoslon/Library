@@ -9,10 +9,13 @@ import io.DataReader;
 import io.file.FileManager;
 import io.file.FileManagerBuilder;
 import model.Book;
+import model.Comparator.AlphabeticalTitleComparator;
 import model.Library;
 import model.Magazine;
 import model.Publication;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 
 class LibraryControl {
@@ -104,8 +107,19 @@ class LibraryControl {
     }
 
     private void printBooks() {
-        Publication[] publications = library.getPublications();
+        Publication[] publications = getSortedPublications();
         printer.printBooks(publications);
+    }
+
+    private void printMagazines() {
+        Publication[] publications = getSortedPublications();
+        printer.printMagazines(publications);
+    }
+
+    private Publication[] getSortedPublications() {
+        Publication[] publications = library.getPublications();
+        Arrays.sort(publications, new AlphabeticalTitleComparator());
+        return publications;
     }
 
     private void addMagazine() {
@@ -117,11 +131,6 @@ class LibraryControl {
         } catch (ArrayIndexOutOfBoundsException e) {
             printer.printLine("Osiągnięto limit pojemności, nie można dodać kolejnego magazynu");
         }
-    }
-
-    private void printMagazines() {
-        Publication[] publications = library.getPublications();
-        printer.printMagazines(publications);
     }
 
     private void deleteMagazine() {
