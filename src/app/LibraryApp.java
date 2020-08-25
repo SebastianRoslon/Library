@@ -7,5 +7,7 @@ package app;
         System.out.println(APP_NAME);
         LibraryControl libControl = new LibraryControl();
         libControl.controlLoop();
+
+         ed
     }
 }
