@@ -1,4 +1,4 @@
-package model.Comparator;
+package model.comparator;
 
 import model.Publication;
 

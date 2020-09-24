@@ -8,6 +8,5 @@ package app;
         LibraryControl libControl = new LibraryControl();
         libControl.controlLoop();
 
-         ed
     }
 }

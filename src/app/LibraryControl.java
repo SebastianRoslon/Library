@@ -9,12 +9,11 @@ import io.DataReader;
 import io.file.FileManager;
 import io.file.FileManagerBuilder;
 import model.Book;
-import model.Comparator.AlphabeticalTitleComparator;
+import model.comparator.AlphabeticalTitleComparator;
 import model.Library;
 import model.Magazine;
 import model.Publication;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 
