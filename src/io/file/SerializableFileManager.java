@@ -12,7 +12,7 @@ public class SerializableFileManager implements FileManager {
     @Override
     public void exportData(Library library) {
         try (FileOutputStream fos = new FileOutputStream(FILE_NAME);
-             ObjectOutputStream oos = new ObjectOutputStream(fos)
+             ObjectOutputStream oos = new ObjectOutputStream(fos);
         ){
             oos.writeObject(library);
         } catch (FileNotFoundException e) {
@@ -25,7 +25,7 @@ public class SerializableFileManager implements FileManager {
     @Override
     public Library importData() {
         try (FileInputStream fis = new FileInputStream(FILE_NAME);
-             ObjectInputStream ois = new ObjectInputStream(fis)
+             ObjectInputStream ois = new ObjectInputStream(fis);
         ) {
             return (Library) ois.readObject();
         } catch (FileNotFoundException e) {

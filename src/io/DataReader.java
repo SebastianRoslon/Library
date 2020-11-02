@@ -1,6 +1,7 @@
 package io;
 
 import model.Book;
+import model.LibraryUser;
 import model.Magazine;
 
 import java.util.Scanner;
@@ -13,10 +14,6 @@ public class DataReader {
         this.printer = printer;
     }
 
-    public String getString(){
-        return sc.nextLine();
-    }
-
     public void close() {
         sc.close();
     }
@@ -27,6 +24,10 @@ public class DataReader {
         } finally {
             sc.nextLine();
         }
+    }
+
+    public String getString() {
+        return sc.nextLine();
     }
 
     public Book readAndCreateBook() {
@@ -62,4 +63,15 @@ public class DataReader {
 
         return new Magazine(title, publisher, language, year, month, day);
     }
+
+    public LibraryUser createLibraryUser() {
+        printer.printLine("Imię");
+        String firstName = sc.nextLine();
+        printer.printLine("Nazwisko");
+        String lastName = sc.nextLine();
+        printer.printLine("Pesel");
+        String pesel = sc.nextLine();
+        return new LibraryUser(firstName, lastName, pesel);
+    }
+
 }

@@ -20,6 +20,11 @@ public class LibraryUser extends User {
         super(firstName, lastName, pesel);
     }
 
+    @Override
+    public String toCsv() {
+        return getFirstName() + ";" + getLastName() + ";" + getPesel();
+    }
+
     private void addPublicationToHistory(Publication pub) {
         publicationHistory.add(pub);
     }
@@ -36,6 +41,7 @@ public class LibraryUser extends User {
         }
         return result;
     }
+
 
     @Override
     public boolean equals(Object o) {
