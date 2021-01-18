@@ -1,2 +1,2 @@
 # biblioteka 
-projekt programu do obslugi biblioteki
+console application in Java from Javastart.pl course
