@@ -6,7 +6,6 @@ import exception.InvalidDataException;
 import model.*;
 import java.io.*;
 import java.util.Collection;
-import java.util.Scanner;
 
 public class CsvFileManager implements FileManager {
     private static final String PUBLICATIONS_FILE_NAME = "Library.csv";
